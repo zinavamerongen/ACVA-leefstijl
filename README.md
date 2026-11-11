@@ -16,7 +16,7 @@ Een eerste kennismaking met data in R: bestanden inladen (csv, Excel, rds) en be
 
 4.  Open `Basis_Data_Inladen.Rmd` en voer de blokken code één voor één uit met het groene pijltje.
 5+6  
-
+test
 Hello
 
 ## Inhoud
