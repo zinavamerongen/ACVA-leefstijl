@@ -19,6 +19,7 @@ Een eerste kennismaking met data in R: bestanden inladen (csv, Excel, rds) en be
 test
 Hello Melissa
 Hallo roos hoe is het
+Goed met jou?
 ## Inhoud
 
 | Bestand | Wat is het |
