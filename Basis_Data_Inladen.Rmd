@@ -22,6 +22,12 @@ install.packages(c("tidyverse", "readxl", "rmarkdown"))
 Dit doe je elke keer dat je R opnieuw opstart.
 
 ```{r pakketten, message=FALSE}
+```
+
+```{r pakketten, message=FALSE}
+```
+
+```{r pakketten, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
@@ -185,11 +191,11 @@ colSums(is.na(kittens))
 
 Bij de melding `'...' does not exist in current working directory` klopt het pad of de bestandsnaam niet. Controleer:
 
--   Staat het project open (rechtsboven in RStudio staat de projectnaam)?
+- Staat het project open (rechtsboven in RStudio staat de projectnaam)?
 
--   Klopt de spelling, inclusief hoofdletters en `.csv`?
+- Klopt de spelling, inclusief hoofdletters en `.csv`?
 
--   Staat het bestand in de map die `list.files("data")` laat zien?
+- Staat het bestand in de map die `list.files("data")` laat zien?
 
 ## 4.2 Alles staat in één kolom
 
