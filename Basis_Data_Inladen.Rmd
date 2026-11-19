@@ -22,6 +22,12 @@ install.packages(c("tidyverse", "readxl", "rmarkdown")
 Dit doe je elke keer dat je R opnieuw opstart.
 
 ```{r pakketten, message=FALSE}
+```
+
+```{r pakketten, message=FALSE}
+```
+
+```{r pakketten, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
