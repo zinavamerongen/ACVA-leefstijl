@@ -54,6 +54,8 @@ Bij inladen gebeuren steeds twee dingen: een functie leest het bestand, en met h
 
 ```{r csv_inladen}
 kittens <- read_csv("data/kittens.csv")
+
+drankgebruik <- read_csv("data/Buurtatlas_drankgebruik.csv")
 ```
 
 R meldt hoeveel rijen en kolommen er zijn ingelezen en welk type elke kolom heeft: `dbl` is een getal, `chr` is tekst.
