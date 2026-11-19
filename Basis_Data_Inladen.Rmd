@@ -54,6 +54,8 @@ Bij inladen gebeuren steeds twee dingen: een functie leest het bestand, en met h
 
 ```{r csv_inladen}
 kittens <- read_csv("data/kittens.csv")
+
+drankgebruik <- read_csv("data/Buurtatlas_drankgebruik.csv")
 ```
 
 R meldt hoeveel rijen en kolommen er zijn ingelezen en welk type elke kolom heeft: `dbl` is een getal, `chr` is tekst.
@@ -185,11 +187,11 @@ colSums(is.na(kittens))
 
 Bij de melding `'...' does not exist in current working directory` klopt het pad of de bestandsnaam niet. Controleer:
 
--   Staat het project open (rechtsboven in RStudio staat de projectnaam)?
+- Staat het project open (rechtsboven in RStudio staat de projectnaam)?
 
--   Klopt de spelling, inclusief hoofdletters en `.csv`?
+- Klopt de spelling, inclusief hoofdletters en `.csv`?
 
--   Staat het bestand in de map die `list.files("data")` laat zien?
+- Staat het bestand in de map die `list.files("data")` laat zien?
 
 ## 4.2 Alles staat in één kolom
 
