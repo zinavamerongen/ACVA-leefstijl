@@ -18,13 +18,13 @@ library(tidyverse)
 
 Dinsdag deden we een significantietoets in vijf stappen. Vandaag doen we precies hetzelfde in R.
 
-| Stap | Wat doe je?                  | Vandaag in R                         |
-|------|------------------------------|--------------------------------------|
-| 1    | Aannames controleren         | `glimpse()`, `summarise()`, `count()`, `ggplot()` |
-| 2    | Hypothesen opstellen         | zelf nadenken                        |
-| 3    | Toetsingsgrootheid berekenen | eerst met de hand, dan `t.test()` en `prop.test()` |
-| 4    | P-waarde bepalen             | `pt()` en `pnorm()`                  |
-| 5    | Conclusie in de context      | zelf opschrijven                     |
+| Stap | Wat doe je? | Vandaag in R |
+|----|----|----|
+| 1 | Aannames controleren | `glimpse()`, `summarise()`, `count()`, `ggplot()` |
+| 2 | Hypothesen opstellen | zelf nadenken |
+| 3 | Toetsingsgrootheid berekenen | eerst met de hand, dan `t.test()` en `prop.test()` |
+| 4 | P-waarde bepalen | `pt()` en `pnorm()` |
+| 5 | Conclusie in de context | zelf opschrijven |
 
 # Deel 1 - De data
 
@@ -67,6 +67,8 @@ kittens_2023 <- kittens |>
   filter(year == 2023)
 
 kittens_2023
+
+unique(kittens$provincie)
 ```
 
 Nu is elke rij één provincie: 12 waarnemingen.
@@ -242,7 +244,7 @@ Ligt 100 in het betrouwbaarheidsinterval?
 
 $P = 0{,}020$ is kleiner dan $\alpha = 0{,}05$: we verwerpen $H_0$.
 
-> In 2023 werden per provincie gemiddeld meer kittens geboren (M = 166,9, SD = 85,3) dan de 100 van tien jaar geleden, t(11) = 2,72, p = 0,020.
+> In 2023 werden per provincie gemiddeld meer kittens geboren (M = 166,9, SD = 85,3) dan de 100 van tien jaar eerder, t(11) = 2,72, p = 0,020.
 
 ## 2.8 Waarom werkt dit? Een simulatie
 
@@ -426,10 +428,10 @@ Niet verwerpen betekent niet dat $H_0$ bewezen is. De data passen bij 80%, maar 
 
 ## 4.1 Wanneer welke?
 
-| Variabele                 | Parameter | Toets   | Verdeling                    | In R          |
-|---------------------------|-----------|---------|------------------------------|---------------|
-| Categorisch (ja/nee)      | $p$       | z-toets | standaardnormaal             | `prop.test()` |
-| Kwantitatief (een getal)  | $\mu$     | t-toets | t-verdeling met $df = n - 1$ | `t.test()`    |
+| Variabele | Parameter | Toets | Verdeling | In R |
+|----|----|----|----|----|
+| Categorisch (ja/nee) | $p$ | z-toets | standaardnormaal | `prop.test()` |
+| Kwantitatief (een getal) | $\mu$ | t-toets | t-verdeling met $df = n - 1$ | `t.test()` |
 
 ## 4.2 Waarom een andere verdeling?
 
@@ -469,40 +471,49 @@ Een journalist schrijft: "In een gemiddelde county heeft 18% van de volwassenen 
 ### 5.1 Laad `midwest.csv` in en bekijk de variabele `percollege`
 
 ```{r oefening_inladen}
-
+midwest <- midwest
 ```
 
 ### 5.2 Schrijf de hypothesen op
 
-$H_0$:
+$H_0$: mu = 0,18
 
-$H_a$:
+$H_a$: mu is niet 0,18
 
 ### 5.3 Bereken n, gemiddelde, mediaan en standaarddeviatie van `percollege`
 
 ```{r oefening_beschrijvend}
+midwest |>
+  summarise(
+    aantal = n(),
+    gemiddelde = mean(percollege),
+    mediaan = median(percollege),
+    sd = sd(percollege)
+  )
 
 ```
 
 ### 5.4 Maak een histogram en een boxplot van `percollege`
 
-```{r oefening_grafieken}
-
+```{r boxplot}
+ggplot(midwest, aes(x = percollege)) +
+  geom_boxplot(fill = "#B8D0EA") +
+  labs(x = "percollege")
 ```
 
 ### 5.5 Mag de t-toets? Leg uit met je antwoorden op 5.3 en 5.4
 
-Antwoord:
+Antwoord: ja die mag want ik vind heeft iets te maken met of het een catogorie is of niet
 
 ### 5.6 Bereken t met de hand en controleer met `t.test()`
 
 ```{r oefening_t}
-
+t.test(midwest$percollege, mu = 18)
 ```
 
 ### 5.7 Schrijf de conclusie in de context
 
-Antwoord:
+Antwoord: nog even een keer doen
 
 ## Opdracht B: een z-toets
 
@@ -511,19 +522,26 @@ Een beleidsmaker beweert: "40% van de county's ligt in een stedelijk gebied." De
 ### 5.8 Tel hoeveel county's wel en niet in een stedelijk gebied liggen
 
 ```{r oefening_tellen}
-
+midwest$inmetro |>
+  as.factor() |>
+  summary()
 ```
 
 ### 5.9 Controleer of de steekproef groot genoeg is
 
 ```{r oefening_groot_genoeg}
+midwest |> filter(inmetro == 1) |> nrow() > 15
 
+midwest |> filter(inmetro == 0) |> nrow() > 15
 ```
 
 ### 5.10 Bereken z met de hand en controleer met `prop.test()`
 
 ```{r oefening_z}
+aantal_ja <- sum(midwest$inmetro) # 150
+n <- nrow(midwest) #437
 
+prop.test(x = aantal_ja, n = n, p = 0.4, correct = FALSE)
 ```
 
 ### 5.11 Schrijf de conclusie in de context
